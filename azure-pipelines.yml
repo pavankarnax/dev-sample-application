@@ -1,0 +1,29 @@
+# Starter pipeline for a .NET Core application
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    arguments: '--configuration Release'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish'
+  inputs:
+    command: 'publish'
+    projects: '**/*.csproj'
+    arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
+
+- task: AzureWebApp@1
+  displayName: 'Azure Web App deploy'
+  inputs:
+    azureSubscription: '<azure-subscription>'
+    appName: '<web-app-name>'
+    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
+    startUpCommand: 'dotnet <project-name>.dll'
