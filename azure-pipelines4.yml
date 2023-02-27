@@ -19,14 +19,6 @@ steps:
     command: 'publish'
     projects: '**/*.csproj'
     arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
-
-- task: AzureWebApp@1
-  displayName: 'Azure Web App deploy'
-  inputs:
-    azureSubscription: '<azure-subscription>'
-    appName: '<web-app-name>'
-    package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
-    startUpCommand: 'dotnet <project-name>.dll'
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'Free Trial(1)(14c477c8-5443-4a69-8933-f07a511e0a31)'
