@@ -27,3 +27,10 @@ steps:
     appName: '<web-app-name>'
     package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
     startUpCommand: 'dotnet <project-name>.dll'
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'Free Trial(1)(14c477c8-5443-4a69-8933-f07a511e0a31)'
+    appType: 'webAppLinux'
+    appName: 'first-net-app'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    runtimeStack: 'DOTNETCORE|2.1'
