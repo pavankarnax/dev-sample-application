@@ -27,6 +27,3 @@ steps:
     appName: '<web-app-name>'
     package: '$(Build.ArtifactStagingDirectory)/**/*.zip'
     startUpCommand: 'dotnet <project-name>.dll'
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
